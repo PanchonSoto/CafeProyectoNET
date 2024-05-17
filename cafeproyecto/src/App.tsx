@@ -1,35 +1,31 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Theme } from '@radix-ui/themes';
+import { Home, Landing, Login, Register } from './pages/index';
+import '@radix-ui/themes/styles.css';
+import { Navbar } from "./components/Navbar";
+
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    return (
+        <Theme>
+            <BrowserRouter>
+                <Navbar username="Pancho"/> {/* Renderiza tu barra de navegación aquí */}
+                <div className="main-content">
+                    <Routes>
+                        <Route path="/" element={<h1>Home</h1>} />
+                        <Route path="/landing" element={<Landing />} />
+                        {/* Las rutas de login y registro no incluyen la barra de navegación */}
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/register" element={<Register />} />
+                        {/* Otras rutas con la barra de navegación */}
+                        <Route path="/home" element={<Home />} />
+                        {/* Otras rutas con la barra de navegación */}
+                    </Routes>
+                </div>
+            </BrowserRouter>
+        </Theme>
+    );
 }
 
-export default App
+export default App;
