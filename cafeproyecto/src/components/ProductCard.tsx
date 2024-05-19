@@ -110,7 +110,7 @@ export const Productcard: React.FC<ProductCardProps> = ({
                             tabIndex={tabIndex}
                             onClick={(e) => e.preventDefault()}
                         >
-                            Footwear
+                            Bebida
                         </Link>
                     </Flex>
 
