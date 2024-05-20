@@ -20,7 +20,7 @@ export const Home = ({...props }) => {
     }
 
     return (
-        <div style={{ height: '100vh', overflow: 'hidden'}}> {/* Envuelve el contenedor principal para evitar el scroll de toda la página */}
+        <div style={{ height: '100vh', overflow: 'hidden'}}>
 
           <ScrollArea.Root className="scroll-area-root">
             <Flex direction="row" gap="4" justify={"start"} pl={"9"} pt={"6"} pb={"3"}>
