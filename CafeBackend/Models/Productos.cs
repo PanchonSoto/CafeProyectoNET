@@ -8,7 +8,7 @@
         public decimal precio { get; set; }
         public Boolean disponible { get; set; }
         public DateTime fechaCreacion { get; set; } = DateTime.Now;
-        public string imagenUrl { get; set; }
+        public required string imagenUrl { get; set; }
 
     }
 }
