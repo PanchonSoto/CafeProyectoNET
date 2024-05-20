@@ -8,7 +8,7 @@ import { Layout } from "./routes/RouteLayout";
 
 function App() {
     return (
-        <Theme appearance="dark">
+        <Theme appearance="light">
             <BrowserRouter>
                 <Layout />
             </BrowserRouter>

@@ -7,7 +7,7 @@ import '../../styles/login-theme.css';
 
 export const Login = () => {
 
-  const { user, login, logout } = useAuth();
+  const { login } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');

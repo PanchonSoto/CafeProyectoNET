@@ -3,14 +3,15 @@ import { Box, Card, Flex, Heading, Separator } from '@radix-ui/themes';
 import { Productcard } from "../components/ProductCard";
 import useFetchProducts from "../hooks/fetchProducts";
 import * as ScrollArea from '@radix-ui/react-scroll-area';
-import '../App.css'
+import '../App.css';
+import '../assets/radixStyles.css';
 
 
 export const Home = ({...props }) => {
 
     const [portalContainer, setPortalContainer] = React.useState<HTMLDivElement | null>(null);
     const { products, loading, error } = useFetchProducts('http://localhost:5084/api/Productos');
-
+    
     if (loading) {
         return <div>Loading...</div>;
     }
@@ -20,16 +21,17 @@ export const Home = ({...props }) => {
     }
 
     return (
-        <div style={{ height: '100vh', overflow: 'hidden'}}>
+        <div style={{ height: '100vh', overflow: 'hidden'}} className="main-content">
 
           <ScrollArea.Root className="scroll-area-root">
-            <Flex direction="row" gap="4" justify={"start"} pl={"9"} pt={"6"} pb={"3"}>
-                <Heading>Productos</Heading>
-            </Flex>
-            <Box>
-                <Separator size="4" style={{height:"3px"}}/>
-            </Box>
+
             <ScrollArea.Viewport className="scroll-area-viewport">
+            <Flex direction="row" gap="4" justify={"start"} pl={"9"} pt={"2"} >
+                <Heading style={{ color: '#e3e3e3' }}>Productos</Heading>
+            </Flex>
+              <Box pb={"4"} mb={"3"}>
+                  <Separator  size="4" style={{height:"1px"}}/>
+              </Box>
               <Flex 
                 align="center" 
                 justify="center" 
@@ -42,7 +44,7 @@ export const Home = ({...props }) => {
               >
                 {products.map(product => (
                   <Productcard 
-                    key={product.productoId} // Asegúrate de agregar una key única
+                    key={product.productoId}
                     productoId={product.productoId}
                     nombre={product.nombre}
                     descripcion={product.descripcion}

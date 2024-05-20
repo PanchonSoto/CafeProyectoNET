@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 const useAuth = () => {
+  const navigate = useNavigate();
+
   const [user, setUser] = useState(() => {
     
     const savedUser = localStorage.getItem('user');
@@ -26,6 +29,7 @@ const useAuth = () => {
       const userData = await response.json();
       setUser(userData);
       localStorage.setItem('user', JSON.stringify(userData));
+      navigate('/');
     } catch (error) {
       console.error('Login error:', error);
       throw error;
@@ -33,8 +37,14 @@ const useAuth = () => {
   };
 
   const logout = () => {
-    setUser(null);
-    localStorage.removeItem('user');
+    try {      
+      setUser(null);
+      localStorage.removeItem('user');
+      navigate('/login');
+
+    } catch (error) {
+      throw error;
+    }
   };
 
   useEffect(() => {

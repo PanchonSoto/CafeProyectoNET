@@ -4,7 +4,7 @@ import { Landing, Login, Register, Home } from "../pages";
 import '../App.css';
 import useAuth from "../hooks/fetchLogin";
 import ProtectedRoute  from "../components/guard/ProtectedRoute";
-import NotFound from "../components/NotFound";
+// import NotFound from "../components/NotFound";
 import PublicRoute from "../components/guard/PublicRoutes";
 
 
@@ -12,7 +12,7 @@ export const Layout = () => {
     const location = useLocation();
     const hideNavbarPaths = ['/login', '/register'];
 
-    const { user, login, logout } = useAuth();
+    const { user } = useAuth();
 
     return (
         <>
