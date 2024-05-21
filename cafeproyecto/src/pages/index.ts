@@ -1,4 +1,4 @@
 export * from './Home';
-export * from './LandingPage';
+export * from './HistoryPage';
 export * from './auth/Login';
 export * from './auth/Register';

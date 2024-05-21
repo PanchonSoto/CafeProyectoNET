@@ -13,11 +13,11 @@ export const Home = ({...props }) => {
     const { products, loading, error } = useFetchProducts('http://localhost:5084/api/Productos');
     
     if (loading) {
-        return <div>Loading...</div>;
+      return <div style={{ height: '100vh', overflow: 'hidden'}} className="main-content">Loading...</div>;
     }
     
     if (error) {
-        return <div>Error: {error.message}</div>;
+      return <div style={{ height: '100vh', overflow: 'hidden'}} className="main-content">Error: {error.message}</div>;
     }
 
     return (

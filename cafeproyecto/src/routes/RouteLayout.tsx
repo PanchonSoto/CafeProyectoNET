@@ -1,6 +1,6 @@
 import { useLocation, Routes, Route, Navigate } from "react-router-dom";
 import { Navbar } from "../components/Navbar";
-import { Landing, Login, Register, Home } from "../pages";
+import { History, Login, Register, Home } from "../pages";
 import '../App.css';
 import useAuth from "../hooks/fetchLogin";
 import ProtectedRoute  from "../components/guard/ProtectedRoute";
@@ -48,7 +48,7 @@ export const Layout = () => {
                     path="/landing"
                     element={
                         <ProtectedRoute>
-                            <Landing />
+                            <History />
                         </ProtectedRoute>
                     }
                 />

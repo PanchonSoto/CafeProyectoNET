@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Flex, Card, Heading, Box, TextField, Button, Text, Link } from "@radix-ui/themes";
 import useAuth from '../../hooks/fetchLogin';
 
@@ -6,6 +7,8 @@ import '../../styles/login-theme.css';
 
 
 export const Login = () => {
+
+  const navigate = useNavigate();
 
   const { login } = useAuth();
   const [email, setEmail] = useState('');
@@ -33,7 +36,8 @@ export const Login = () => {
 
   return (
     <div className="container">
-      <Flex className="flex" justify={'center'} flexShrink="0" gap="6" direction="column" width="416px" mx={'auto'}>
+      <Flex className="flex" justify={'center'} flexShrink="0" gap="6" direction="column" 
+      width="416px" mx={'auto'}>
         <Card size="4" className="card">
           <Heading as="h3" size="6" trim="start" mb="5">
             Iniciar sesión
@@ -76,9 +80,9 @@ export const Login = () => {
             </Button>
           </Flex>
           <Flex mt="6" justify="center" gap="3">
-            <Button variant="outline" style={{width:'100%'}}>
+            <Link href="#" size="2" onClick={() => navigate("/register")}>
               Registrarse
-            </Button>
+            </Link>
           </Flex>
         </Card>
       </Flex>  

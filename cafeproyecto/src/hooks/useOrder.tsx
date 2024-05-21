@@ -25,11 +25,11 @@ const useOrder = () => {
       
     } catch (error: unknown) {
         if (error instanceof Error) {
-            console.error('Error al crear la orden:', error.message);
-            setError(error.message);
+          console.error('Error al crear la orden:', error.message);
+          setError(error.message);
         } else {
-            console.error('Error desconocido al crear la orden:', error);
-            setError('Error al crear la orden.');
+          console.error('Error desconocido al crear la orden:', error);
+          setError('Error al crear la orden.');
         }
     }
   };
