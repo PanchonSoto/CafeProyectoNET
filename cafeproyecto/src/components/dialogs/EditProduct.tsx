@@ -19,6 +19,8 @@ interface EditProduct {
 const EditProductDialog: React.FC<EditProduct> = ({ producto, triggerRef, onProductUpdated  }) => {
 
 
+  const [isOpen, setIsOpen] = useState(false);
+
   const [name, setName] = useState('');
   const [desc, setDesc] = useState('');
   const [price, setPrice] = useState('');
@@ -59,6 +61,7 @@ const EditProductDialog: React.FC<EditProduct> = ({ producto, triggerRef, onProd
       };
       const updatedProduct = await editProduct(body);
       onProductUpdated();
+      setIsOpen(false);
       console.log(updatedProduct);
     } catch (err) {
       console.log(err);
@@ -68,7 +71,7 @@ const EditProductDialog: React.FC<EditProduct> = ({ producto, triggerRef, onProd
 
 
   return (
-    <Dialog.Root>
+    <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
       <Dialog.Trigger asChild>
         <Button ref={triggerRef} className="Button violet">
           <Pencil2Icon />
