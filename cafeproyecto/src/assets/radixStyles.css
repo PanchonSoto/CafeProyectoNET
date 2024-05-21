@@ -19,10 +19,11 @@
   margin-right: 1rem;
 }
 
-.navbar-link,a {
+.navbar-link,
+a {
   color: white;
   text-decoration: none;
-  color: inherit; /* Para heredar el color del texto circundante */
+  color: inherit;
 }
 
 .navbar-link:hover {

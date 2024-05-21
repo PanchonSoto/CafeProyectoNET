@@ -12,61 +12,61 @@ import '../assets/radixStyles.css';
 import EditProductDialog from "../components/dialogs/EditProduct";
 
 
-export const Home = ({...props }) => {
+export const Home = ({ ...props }) => {
 
   const triggerRef = useRef<HTMLButtonElement>(null);
   const [refresh, setRefresh] = useState(false);
-  
+
   const [portalContainer, setPortalContainer] = React.useState<HTMLDivElement | null>(null);
-  const { products, loading, error } = useFetchProducts('http://localhost:5084/api/Productos',refresh);
+  const { products, loading, error } = useFetchProducts('http://localhost:5084/api/Productos', refresh);
 
   const handleProductUpdated = () => {
     setRefresh(!refresh);
   };
-  
+
   if (loading) {
-    return <div style={{ height: '100vh', overflow: 'hidden'}} className="main-content">Loading...</div>;
+    return <div style={{ height: '100vh', overflow: 'hidden' }} className="main-content">Loading...</div>;
   }
-  
+
   if (error) {
-    return <div style={{ height: '100vh', overflow: 'hidden'}} className="main-content">Error: {error.message}</div>;
+    return <div style={{ height: '100vh', overflow: 'hidden' }} className="main-content">Error: {error.message}</div>;
   }
 
   const openDialog = () => {
     if (triggerRef.current) {
-        triggerRef.current.click();
+      triggerRef.current.click();
     }
-};
+  };
 
   return (
-    <div style={{ height: '100vh', overflow: 'hidden'}} className="main-content">
+    <div style={{ height: '100vh', overflow: 'hidden' }} className="main-content">
 
       <ScrollArea.Root className="scroll-area-root">
 
         <ScrollArea.Viewport className="scroll-area-viewport">
-        <Flex direction="row" gap="4" justify={"between"} pl={"9"} pt={"2"}>
+          <Flex direction="row" gap="4" justify={"between"} pl={"9"} pt={"2"}>
             <Heading style={{ color: '#e3e3e3' }}>Productos</Heading>
             <EditProductDialog
               triggerRef={triggerRef}
               onProductUpdated={handleProductUpdated}
               btnTitle="create"
             />
-        </Flex>
+          </Flex>
           <Box pb={"4"} mb={"3"}>
-              <Separator  size="4" style={{height:"1px"}}/>
+            <Separator size="4" style={{ height: "1px" }} />
           </Box>
-          <Flex 
-            align="center" 
-            justify="center" 
-            gap="2" 
-            ref={setPortalContainer} 
-            direction="row" 
+          <Flex
+            align="center"
+            justify="center"
+            gap="2"
+            ref={setPortalContainer}
+            direction="row"
             wrap="wrap"
-            style={{marginBottom:220}} 
+            style={{ marginBottom: 220 }}
             {...props}
           >
             {products.map(product => (
-              <Productcard 
+              <Productcard
                 key={product.productoId}
                 productoId={product.productoId}
                 nombre={product.nombre}

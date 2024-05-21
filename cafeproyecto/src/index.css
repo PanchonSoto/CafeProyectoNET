@@ -35,12 +35,12 @@ time, mark, audio, video {
   vertical-align: baseline;
 }
 
-/* Establecer el tamaño del contenido en el área de visualización */
+
 html, body {
   height: 100%;
 }
 
-/* Eliminar el borde del área de visualización */
+
 body {
   border: none;
 }

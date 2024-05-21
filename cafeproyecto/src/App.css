@@ -20,7 +20,7 @@ body {
   height: 100%;
   padding-top: 30px;
   padding-bottom: 100px;
-  overflow: auto; /* Asegúrate de que el viewport tenga overflow auto */
+  overflow: auto;
 }
 
 .scroll-area-scrollbar {
@@ -31,11 +31,11 @@ body {
   transition: background 160ms ease-out;
 }
 
-.scroll-area-scrollbar[orientation='vertical'] {
+.scroll-area-scrollbar[orientation="vertical"] {
   width: 10px;
 }
 
-.scroll-area-scrollbar[orientation='horizontal'] {
+.scroll-area-scrollbar[orientation="horizontal"] {
   flex-direction: column;
   height: 10px;
 }
@@ -58,7 +58,6 @@ body {
   background-color: #1e2029;
   /* background-image: url('./assets/cafebg.jpg') no-repeat center center; */
   /* background: linear-gradient(to bottom, #241306ab, #391e02, #160c01); */
-
 }
 
 /* .main-content:after {

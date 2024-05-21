@@ -22,15 +22,15 @@ const useOrder = () => {
 
       const createdOrder = await response.json();
       setOrder(createdOrder);
-      
+
     } catch (error: unknown) {
-        if (error instanceof Error) {
-          console.error('Error al crear la orden:', error.message);
-          setError(error.message);
-        } else {
-          console.error('Error desconocido al crear la orden:', error);
-          setError('Error al crear la orden.');
-        }
+      if (error instanceof Error) {
+        console.error('Error al crear la orden:', error.message);
+        setError(error.message);
+      } else {
+        console.error('Error desconocido al crear la orden:', error);
+        setError('Error al crear la orden.');
+      }
     }
   };
 

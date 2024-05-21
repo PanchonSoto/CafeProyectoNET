@@ -18,28 +18,28 @@ export const Register = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  const handleNameChange = (event:React.ChangeEvent<HTMLInputElement>) => {
+  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setName(event.target?.value);
   };
 
-  const handleLastNameChange = (event:React.ChangeEvent<HTMLInputElement>) => {
+  const handleLastNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setLastName(event.target.value);
   };
 
-  const handleEmailChange = (event:React.ChangeEvent<HTMLInputElement>) => {
+  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target?.value);
   };
 
-  const handlePasswordChange = (event:React.ChangeEvent<HTMLInputElement>) => {
+  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
   };
 
-  const handleSubmit = async (event:React.FormEvent) => {
-    console.log('event3:=> ',event);
+  const handleSubmit = async (event: React.FormEvent) => {
+    console.log('event3:=> ', event);
     event.preventDefault();
     try {
-      console.log(email, password );
-      await register({ email, password, nombre:name, apellido:lastName });
+      console.log(email, password);
+      await register({ email, password, nombre: name, apellido: lastName });
     } catch (err) {
       console.log(err);
       setError(JSON.stringify(err));
@@ -48,8 +48,8 @@ export const Register = () => {
 
   return (
     <div className="container">
-      <Flex className="flex" justify={'center'} flexShrink="0" gap="6" direction="column" 
-      width="416px" mx={'auto'}>
+      <Flex className="flex" justify={'center'} flexShrink="0" gap="6" direction="column"
+        width="416px" mx={'auto'}>
         <Card size="4" className="card">
           <Heading as="h3" size="6" trim="start" mb="5">
             Registro
@@ -115,7 +115,7 @@ export const Register = () => {
           {error && <Text color="red">{error}</Text>}
 
           <Flex mt="4" justify="center" gap="3">
-            <Button variant="outline" style={{width:'100%'}} onClick={handleSubmit}>
+            <Button variant="outline" style={{ width: '100%' }} onClick={handleSubmit}>
               Registrarse
             </Button>
           </Flex>
@@ -125,7 +125,7 @@ export const Register = () => {
             </Link>
           </Flex>
         </Card>
-      </Flex>  
+      </Flex>
     </div>
   )
 }

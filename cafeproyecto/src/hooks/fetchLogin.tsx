@@ -6,12 +6,12 @@ const useAuth = () => {
   const navigate = useNavigate();
 
   const [user, setUser] = useState(() => {
-    
+
     const savedUser = localStorage.getItem('user');
     return savedUser ? JSON.parse(savedUser) : null;
   });
 
-  const login = async (credentials:{email:string, password:string}) => {
+  const login = async (credentials: { email: string, password: string }) => {
     try {
       const body = { "email": credentials.email, "contraseña": credentials.password }
       console.log(credentials);
@@ -37,13 +37,13 @@ const useAuth = () => {
     }
   };
 
-  const register = async (credentials:User) => {
+  const register = async (credentials: User) => {
     try {
-      const body = { 
-        "email": credentials.email, 
+      const body = {
+        "email": credentials.email,
         "contraseña": credentials.password,
         "nombre": credentials.nombre,
-        "apellido": credentials.apellido 
+        "apellido": credentials.apellido
       }
       console.log(credentials);
       const response = await fetch('http://localhost:5084/api/Auth/Register', {
@@ -62,18 +62,18 @@ const useAuth = () => {
       setUser(userData);
       localStorage.setItem('user', JSON.stringify(userData));
       navigate('/');
-      
+
     } catch (error: unknown) {
       if (error instanceof Error) {
         console.error('Error al crear user:', error.message);
       } else {
         console.error('Error desconocido al crear user:', error);
       }
-  }
+    }
   };
 
   const logout = () => {
-    try {      
+    try {
       setUser(null);
       localStorage.removeItem('user');
       navigate('/login');
