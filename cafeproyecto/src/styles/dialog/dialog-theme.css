@@ -15,6 +15,12 @@ textarea {
   min-height: 60px;
 }
 
+.btn {
+  margin-right: calc(64px * 1 );
+  background-color: #30a46c!important;
+  color: #e3e3e3!important;
+}
+
 .DialogOverlay {
   background-color: var(--black-a9);
   position: fixed;

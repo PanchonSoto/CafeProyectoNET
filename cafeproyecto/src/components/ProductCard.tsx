@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { Box, Button, Card, Flex, Heading, Link, Separator, Text } from '@radix-ui/themes';
 import { CreateOrder } from '../interfaces/OrderInterface';
+
 import useOrder from '../hooks/useOrder';
 import useAuth from '../hooks/fetchLogin';
 import EditProductDialog from './dialogs/EditProduct';
@@ -109,17 +110,17 @@ export const Productcard: React.FC<ProductCardProps> = ({
                             }}
                             triggerRef={triggerRef}
                             onProductUpdated={onProductUpdated}
+                            edit
+                            btnTitle='edit'
                         />
 
                     </Flex>
 
                     <Flex direction="column" flexGrow="1">
                         <DeleteDialog
-                            producto={{
-                                productoId, nombre, descripcion, disponible,
-                                fechaCreacion, imagenUrl, precio
-                            }}
+                            id={productoId}
                             triggerRef={triggerRef}
+                            onProductUpdated={onProductUpdated}
                         />
 
                     </Flex>
