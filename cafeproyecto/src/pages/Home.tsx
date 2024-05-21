@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, Card, Flex, Heading, Separator } from '@radix-ui/themes';
 import { Productcard } from "../components/ProductCard";
 import useFetchProducts from "../hooks/fetchProducts";
@@ -8,9 +8,13 @@ import '../assets/radixStyles.css';
 
 
 export const Home = ({...props }) => {
-
+    const [refresh, setRefresh] = useState(false);
     const [portalContainer, setPortalContainer] = React.useState<HTMLDivElement | null>(null);
-    const { products, loading, error } = useFetchProducts('http://localhost:5084/api/Productos');
+    const { products, loading, error } = useFetchProducts('http://localhost:5084/api/Productos',refresh);
+
+    const handleProductUpdated = () => {
+      setRefresh(!refresh);
+    };
     
     if (loading) {
       return <div style={{ height: '100vh', overflow: 'hidden'}} className="main-content">Loading...</div>;
@@ -52,6 +56,7 @@ export const Home = ({...props }) => {
                     disponible={product.disponible}
                     imagenUrl={product.imagenUrl}
                     fechaCreacion={product.fechaCreacion}
+                    onProductUpdated={handleProductUpdated}
                   />
                 ))}
               </Flex>

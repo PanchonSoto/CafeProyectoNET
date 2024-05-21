@@ -1,22 +1,9 @@
 import { useState, useEffect } from 'react';
+import { UseFetchProductsResult, Product } from '../interfaces/ProductsInterface';
 
-interface Product {
-  productoId: number;
-  nombre: string;
-  descripcion: string;
-  precio: number;
-  disponible: boolean;
-  fechaCreacion: string;
-  imagenUrl: string;
-}
 
-interface UseFetchProductsResult {
-  products: Product[];
-  loading: boolean;
-  error: Error | null;
-}
 
-const useFetchProducts = (url: string): UseFetchProductsResult => {
+const useFetchProducts = (url: string, refresh: boolean): UseFetchProductsResult => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<Error | null>(null);
@@ -38,7 +25,7 @@ const useFetchProducts = (url: string): UseFetchProductsResult => {
     };
 
     fetchProducts();
-  }, [url]);
+  }, [url, refresh]);
 
   return { products, loading, error };
 };
