@@ -20,7 +20,7 @@ body {
   height: 100%;
   padding-top: 30px;
   padding-bottom: 100px;
-  overflow: auto; /* Asegúrate de que el viewport tenga overflow auto */
+  overflow: auto;
 }
 
 .scroll-area-scrollbar {
@@ -31,11 +31,11 @@ body {
   transition: background 160ms ease-out;
 }
 
-.scroll-area-scrollbar[orientation='vertical'] {
+.scroll-area-scrollbar[orientation="vertical"] {
   width: 10px;
 }
 
-.scroll-area-scrollbar[orientation='horizontal'] {
+.scroll-area-scrollbar[orientation="horizontal"] {
   flex-direction: column;
   height: 10px;
 }
@@ -55,22 +55,23 @@ body {
   /* margin: 20px; */
   width: 100%;
   height: 100%;
-  /* background-image: url('./assets/cafebg.jpg'); */
-  /* background: linear-gradient(to bottom, #241306ab, #391e02, #160c01);
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center; */
+  background-color: #1e2029;
+  /* background-image: url('./assets/cafebg.jpg') no-repeat center center; */
+  /* background: linear-gradient(to bottom, #241306ab, #391e02, #160c01); */
+}
+
+.noShow {
+  display: none!important;
 }
 
 /* .main-content:after {
-  content: "";
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: url('./assets/cafebg.jpg') no-repeat center center;
+  background-image: url('./assets/cafebg.jpg') no-repeat center center;
   background-size: cover;
   opacity: 0.1; 
-  z-index: 1;
+  z-index: 9999;
 } */

@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
-import { UseFetchProductsResult, Product } from '../interfaces/ProductsInterface';
+import { UseGetSellerProducts, SellerProducts } from '../interfaces/ProductsInterface';
 
 
 
-const useFetchProducts = (url: string, refresh: boolean): UseFetchProductsResult => {
-  const [products, setProducts] = useState<Product[]>([]);
+const useFetchSellerProducts = (url: string, refresh: boolean): UseGetSellerProducts => {
+  const [products, setProducts] = useState<SellerProducts[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<Error | null>(null);
 
@@ -15,7 +15,7 @@ const useFetchProducts = (url: string, refresh: boolean): UseFetchProductsResult
         if (!response.ok) {
           throw new Error(`Error: ${response.statusText}`);
         }
-        const data: Product[] = await response.json();
+        const data: SellerProducts[] = await response.json();
         setProducts(data);
       } catch (err) {
         setError(err as Error);
@@ -30,4 +30,4 @@ const useFetchProducts = (url: string, refresh: boolean): UseFetchProductsResult
   return { products, loading, error };
 };
 
-export default useFetchProducts;
+export default useFetchSellerProducts;

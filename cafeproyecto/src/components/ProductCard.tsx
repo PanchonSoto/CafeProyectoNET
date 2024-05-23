@@ -1,23 +1,13 @@
-import React from 'react';
-import {
-    Box,
-    Button,
-    Card,
-    Flex,
-    Heading,
-    IconButton,
-    Link,
-    Select,
-    Separator,
-    Text,
-    Theme,
-} from '@radix-ui/themes';
-import {
-    BookmarkFilledIcon,
-    BookmarkIcon,
-} from '@radix-ui/react-icons';
-import { Label } from '@radix-ui/react-label';
+import React, { useRef } from 'react';
+import { Box, Button, Card, Flex, Heading, Link, Separator, Text } from '@radix-ui/themes';
+import { CreateOrder } from '../interfaces/OrderInterface';
 
+import useOrder from '../hooks/useOrder';
+import useAuth from '../hooks/fetchLogin';
+import EditProductDialog from './dialogs/EditProduct';
+import DeleteDialog from './dialogs/DeleteProduct';
+
+import '../App.css';
 
 interface ProductCardProps {
     productoId: number;
@@ -27,8 +17,9 @@ interface ProductCardProps {
     disponible: boolean;
     fechaCreacion: string;
     imagenUrl: string;
-    fechaCreacionn?: Date; // Puedes usar Date o string dependiendo de tu necesidad
-    focusable?: boolean; // Esto es opcional con un valor por defecto
+    fechaCreacionn?: Date;
+    focusable?: boolean;
+    onProductUpdated: () => void;
 }
 
 export const Productcard: React.FC<ProductCardProps> = ({
@@ -40,119 +31,119 @@ export const Productcard: React.FC<ProductCardProps> = ({
     fechaCreacion,
     imagenUrl,
     focusable = true,
-    ...props
+    onProductUpdated 
 }) => {
 
     const tabIndex = focusable ? undefined : -1;
-    const [state, setState] = React.useState({
-        sneakersBookmarked: false,
-        jeansBookmarked: false,
-        delivery: '',
-        size: '9',
-        material: '',
-        color: '',
-        productMaterial: '',
-        productColor: '',
-        productSizes: [],
-    });
-  return (
-    <Flex flexShrink="0" gap="2" direction="row" width="304px">
-        <Card size="1">
-            <Flex mb="2" position="relative">
-                <img
-                    title="product"
-                    width="280"
-                    height="270"
-                    src={imagenUrl}
-                    style={{ borderRadius: 'var(--radius-1)' }}
-                />
+    const triggerRef = useRef<HTMLButtonElement>(null);
+    const { createOrder } = useOrder();
+    const { user } = useAuth();
 
-                <Theme appearance="light" asChild>
-                    <Flex
-                        align="center"
-                        justify="center"
-                        position="absolute"
-                        bottom="0"
-                        right="0"
-                        width="32px"
-                        height="32px"
-                        style={{ borderRadius: 'var(--radius-3)' }}
-                        m="2"
-                    >
-                        <IconButton
-                            size="2"
-                            tabIndex={tabIndex}
-                            color="gray"
-                            variant="ghost"
-                            highContrast={state.sneakersBookmarked}
-                            onClick={() =>
-                                setState((currentState) => ({
-                                    ...currentState,
-                                    sneakersBookmarked: !currentState.sneakersBookmarked,
-                                }))
-                            }
-                        >
-                            {state.sneakersBookmarked ? <BookmarkFilledIcon /> : <BookmarkIcon />}
-                        </IconButton>
-                    </Flex>
-                </Theme>
-            </Flex>
 
-            <Flex align="end" justify="between" mb="2">
-                <Box>
-                    <Flex mb="1">
-                        <Link
-                            href="#"
-                            underline="hover"
-                            size="2"
-                            color="gray"
-                            highContrast
-                            tabIndex={tabIndex}
-                            onClick={(e) => e.preventDefault()}
-                        >
-                            Bebida
-                        </Link>
-                    </Flex>
+    const onBuy = async (event: React.FormEvent, orderData: CreateOrder) => {
 
-                    <Heading as="h3" size="3">
-                        { nombre }
-                    </Heading>
-                </Box>
+        event.preventDefault();
 
-                <Text size="6" weight="bold">
-                    ${ precio }
-                </Text>
-            </Flex>
+        await createOrder(orderData);
+    };
 
-            <Text as="p" size="2" color="gray" mb="4">
-                { descripcion }
-            </Text>
+    const openDialog = () => {
+        if (triggerRef.current) {
+            triggerRef.current.click();
+        }
+    };
 
-            <Box>
-                <Separator size="4" my="4" />
-            </Box>
+    return (
+        <Flex flexShrink="0" gap="2" direction="row" width="304px">
+            <Card size="1">
+                <Flex mb="2" position="relative">
+                    <img
+                        title={nombre}
+                        width="280"
+                        height="270"
+                        src={imagenUrl}
+                        style={{ borderRadius: 'var(--radius-1)' }}
+                    />
 
-            
-
-            <Flex gap="2" align="end">
-                {/* <Flex direction="column" flexGrow="1">
-                    <Button tabIndex={tabIndex} size="2" variant="solid" color="gray" highContrast>
-                        Editar
-                    </Button>
                 </Flex>
 
-                <Flex direction="column" minWidth="80px">
+                <Flex align="end" justify="between" mb="2">
+                    <Box>
+                        <Flex mb="1">
+                            <Link
+                                href="#"
+                                underline="hover"
+                                size="2"
+                                color="gray"
+                                highContrast
+                                tabIndex={tabIndex}
+                                onClick={(e) => e.preventDefault()}
+                            >
+                                Bebida
+                            </Link>
+                        </Flex>
+
+                        <Heading as="h3" size="3">
+                            {nombre}
+                        </Heading>
+                    </Box>
+
+                    <Text size="6" weight="bold">
+                        ${precio}
+                    </Text>
+                </Flex>
+
+                <Text as="p" size="2" color="gray" mb="4">
+                    {descripcion}
+                </Text>
+
+                <Box>
+                    <Separator size="4" my="4" />
+                </Box>
+
+
+
+                <Flex gap="2" align="end">
+                    <Flex direction="column">
+                        <div className={`${user?.rol !== 'admin' ? 'noShow' : ''}`}>
+                        <EditProductDialog
+                            producto={{
+                                productoId, nombre, descripcion, disponible,
+                                fechaCreacion, imagenUrl, precio
+                            }}
+                            triggerRef={triggerRef}
+                            onProductUpdated={onProductUpdated}
+                            edit
+                            btnTitle='edit'
+                        />
+                        </div>
+
+                    </Flex>
+
+                    <Flex direction="column">
+                        <div className={`${(user?.rol !== 'admin') ? 'noShow' : ''}`}>
+                        <DeleteDialog
+                            id={productoId}
+                            triggerRef={triggerRef}
+                            onProductUpdated={onProductUpdated}
+                        />
+                        </div>
+
+                    </Flex>
+
+                    {/* <Flex direction="column" minWidth="80px">
                     <Button tabIndex={tabIndex} size="2" variant="solid" color="gray" highContrast>
                             Editar
                     </Button>
                 </Flex> */}
 
-                <Button tabIndex={tabIndex} size="2" variant="solid" color="gray" highContrast>
-                    Comprar
-                </Button>
-            </Flex>
-        </Card>
-    </Flex>
+                    <Button tabIndex={tabIndex} size="2" variant="solid" color="gray" highContrast
+                        onClick={(e) => onBuy(e, { productoId, usuarioId: user?.userId, precio, cantidad: 10 })}>
+                        Comprar
+                    </Button>
+                </Flex>
+            </Card>
+        </Flex>
 
-  );
+    );
 }

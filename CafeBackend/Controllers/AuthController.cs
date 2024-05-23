@@ -89,7 +89,7 @@ namespace CafeBackend.Controllers
                         }
                     }
 
-                    // Insertar nuevo usuario
+                    // query para insertar nuevo usuario
                     string insertQuery = @"
                         INSERT INTO Usuarios (userId, nombre, apellido, email, contraseña, fechaRegistro, rol) 
                         VALUES (@UserId, @Nombre, @Apellido, @Email, @Contraseña, @FechaRegistro, @Rol)";
