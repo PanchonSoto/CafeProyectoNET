@@ -6,6 +6,7 @@ import useAuth from "../hooks/fetchLogin";
 import ProtectedRoute  from "../components/guard/ProtectedRoute";
 // import NotFound from "../components/NotFound";
 import PublicRoute from "../components/guard/PublicRoutes";
+import { TopSellers } from "../pages/TopSellers";
 
 
 export const Layout = () => {
@@ -45,10 +46,18 @@ export const Layout = () => {
                     }
                 />
                 <Route
-                    path="/landing"
+                    path="/history"
                     element={
                         <ProtectedRoute>
                             <History />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="/top"
+                    element={
+                        <ProtectedRoute>
+                            <TopSellers />
                         </ProtectedRoute>
                     }
                 />

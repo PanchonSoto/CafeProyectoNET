@@ -10,12 +10,14 @@ import useFetchProducts from "../hooks/fetchProducts";
 import '../App.css';
 import '../assets/radixStyles.css';
 import EditProductDialog from "../components/dialogs/EditProduct";
+import useAuth from "../hooks/fetchLogin";
 
 
 export const Home = ({ ...props }) => {
 
   const triggerRef = useRef<HTMLButtonElement>(null);
   const [refresh, setRefresh] = useState(false);
+  const { user } = useAuth();
 
   const [portalContainer, setPortalContainer] = React.useState<HTMLDivElement | null>(null);
   const { products, loading, error } = useFetchProducts('http://localhost:5084/api/Productos', refresh);
@@ -46,11 +48,13 @@ export const Home = ({ ...props }) => {
         <ScrollArea.Viewport className="scroll-area-viewport">
           <Flex direction="row" gap="4" justify={"between"} pl={"9"} pt={"2"}>
             <Heading style={{ color: '#e3e3e3' }}>Productos</Heading>
+            <div className={`${user?.rol !== 'admin' ? 'noShow' : ''}`}>
             <EditProductDialog
               triggerRef={triggerRef}
               onProductUpdated={handleProductUpdated}
               btnTitle="create"
             />
+            </div>
           </Flex>
           <Box pb={"4"} mb={"3"}>
             <Separator size="4" style={{ height: "1px" }} />

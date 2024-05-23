@@ -7,6 +7,8 @@ import useAuth from '../hooks/fetchLogin';
 import EditProductDialog from './dialogs/EditProduct';
 import DeleteDialog from './dialogs/DeleteProduct';
 
+import '../App.css';
+
 interface ProductCardProps {
     productoId: number;
     nombre: string;
@@ -102,7 +104,8 @@ export const Productcard: React.FC<ProductCardProps> = ({
 
 
                 <Flex gap="2" align="end">
-                    <Flex direction="column" flexGrow="1">
+                    <Flex direction="column">
+                        <div className={`${user?.rol !== 'admin' ? 'noShow' : ''}`}>
                         <EditProductDialog
                             producto={{
                                 productoId, nombre, descripcion, disponible,
@@ -113,15 +116,18 @@ export const Productcard: React.FC<ProductCardProps> = ({
                             edit
                             btnTitle='edit'
                         />
+                        </div>
 
                     </Flex>
 
-                    <Flex direction="column" flexGrow="1">
+                    <Flex direction="column">
+                        <div className={`${(user?.rol !== 'admin') ? 'noShow' : ''}`}>
                         <DeleteDialog
                             id={productoId}
                             triggerRef={triggerRef}
                             onProductUpdated={onProductUpdated}
                         />
+                        </div>
 
                     </Flex>
 

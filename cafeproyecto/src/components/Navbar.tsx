@@ -33,7 +33,10 @@ export const Navbar: React.FC<NavbarProps> = ({ username }) => {
           <Link to="/home">Productos</Link>
         </NavigationMenu.Item>
         <NavigationMenu.Item className="navbar-item">
-          <Link to="/landing">Mis compras</Link>
+          <Link to="/history">Mis compras</Link>
+        </NavigationMenu.Item>
+        <NavigationMenu.Item className="navbar-item">
+          <Link to="/top">Productos mas vendidos</Link>
         </NavigationMenu.Item>
       </NavigationMenu.List>
       <div className="navbar-username">
