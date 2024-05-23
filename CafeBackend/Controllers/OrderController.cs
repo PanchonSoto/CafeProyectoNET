@@ -93,7 +93,8 @@ namespace CafeBackend.Controllers
                         o.cantidad, 
                         o.fechaOrden,
                         p.nombre AS NombreProducto,
-                        p.descripcion AS DescripcionProducto
+                        p.descripcion AS DescripcionProducto,
+                        p.imagenUrl
                     FROM 
                         Ordenes o
                     LEFT JOIN 
@@ -122,7 +123,8 @@ namespace CafeBackend.Controllers
                                 Cantidad = reader.GetInt32(4),
                                 FechaOrden = reader.GetDateTime(5),
                                 NombreProducto = reader.IsDBNull(6) ? null : reader.GetString(6),
-                                DescripcionProducto = reader.IsDBNull(7) ? null : reader.GetString(7)
+                                DescripcionProducto = reader.IsDBNull(7) ? null : reader.GetString(7),
+                                ImagenUrl = reader.GetString(8),
                             };
                             orders.Add(order);
                         }

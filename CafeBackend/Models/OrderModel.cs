@@ -20,5 +20,7 @@
         public DateTime FechaOrden { get; set; }
         public string NombreProducto { get; set; }
         public string DescripcionProducto { get; set; }
+
+        public string ImagenUrl { get; set; }
     }
 }
